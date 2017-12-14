@@ -1,0 +1,3 @@
+Distance: Friends: attract(   500.00,      2.00), repel( 10000.00,      2.00) 	Enemies: attract(  8000.00,      0.50), repel(   800.00,      2.00)
+Damage:   Friends: attract(     0.00,      0.00), repel(     0.00,      0.00) 	Enemies: attract(     0.00,      0.00), repel(     0.00,      0.00)
+Cooldown: Friends: attract(     0.00,      0.00), repel(     0.00,      0.00) 	Enemies: attract(     0.00,      0.00), repel(     0.00,      0.00)
