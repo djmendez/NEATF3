@@ -106,6 +106,7 @@ namespace FastEcslent {
 
 
 	//games
+		void neatGame();
 		void game0();
 		void tester();
 		void worldLimits();

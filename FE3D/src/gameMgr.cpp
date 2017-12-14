@@ -53,8 +53,8 @@ void FastEcslent::GameMgr::init() {
 		//TwoClumps(BANSHEE, BLUE, TWO, ADAPTIVE, 3, ZEALOT, RED, ONE, BESTZEALOT, 25); //tightly grouped);
 		//TwoClumps(BANSHEE, BLUE, TWO, ADAPTIVE, 3, ZEALOT, RED, ONE, OPPONENT_FROM_CHROMOSOME, 25);
 
-		//TwoClumps(ZEALOT, BLUE, TWO, ADAPTIVE, 25, BANSHEE, RED, ONE, BESTVULTURE, 3); //tightly grouped);
-		TwoClumps(ZEALOT, BLUE, TWO, ADAPTIVE, 25, BANSHEE, RED, ONE, OPPONENT_FROM_CHROMOSOME, 3);
+		TwoClumps(ZEALOT, BLUE, TWO, BESTZEALOT, 25, BANSHEE, RED, ONE, BESTVULTURE, 3); //tightly grouped);
+		//TwoClumps(ZEALOT, BLUE, TWO, ADAPTIVE, 25, BANSHEE, RED, ONE, OPPONENT_FROM_CHROMOSOME, 3);
 		break;
 	case 2:
 		//ClumpSpread(ZEALOT, RED, ONE, BESTZEALOT, 25, BANSHEE, BLUE, TWO, ADAPTIVE, 3);
@@ -75,12 +75,33 @@ void FastEcslent::GameMgr::init() {
 	case 6:
 		tester();
 		break;
+		// NEAT
+	case 7:
+		neatGame();
+		break;
 	default:
 		tester();
 	}
 
 }
 
+void FastEcslent::GameMgr::neatGame(){
+
+	Entity *ent;
+
+	float xoff = 1000, zoff = 1000, r = 800;
+
+
+	ent = engine->entityMgr->createEntityForPlayerAndSide(BANSHEE, Ogre::Vector3(xoff, 100, zoff), 0.0f, RED, ONE);
+	ent->init();
+	ent->switchState(ALIVE);
+
+	ent = engine->entityMgr->createEntityForPlayerAndSide(ZEALOT, Ogre::Vector3(xoff + r, 100, zoff +r), 0.0f, BLUE, TWO);
+	ent->init();
+	ent->switchState(ALIVE);
+
+	return;
+}
 
 
 void FastEcslent::GameMgr::worldLimits(){

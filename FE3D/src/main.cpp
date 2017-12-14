@@ -42,22 +42,27 @@ void setOptions(Options *options){
 	options->tacticalAI                 = true;
 	options->shouldWaitForUserToShutGfx = false;
 	options->imapx = options->imapy = options->imapz = 128;
-	options->enableGfx                  = false;
+	//options->enableGfx                  = true; In gameparams inputfile
+
+	//options->maxFrames                  = 2000;
 	options->runDebugTests              = false;
 	options->speedup                    = 2.0;
-	options->maxFrames                  = 2000;
 	options->mapSize                    = 10000;
-	options->gameNumber                 = 3;
+
+	//Game Number 7 is NEAT Game
+	options->gameNumber                 = 1;
 	options->saveDecodedParams          = false;
 	options->terrainPngFilename = "feTerrain.png";
-	options->chromosome = "";
+
 	options->inputFile = "gameparams";
 	options->outputFile = "output";
-	options->opponentChromosomeCount = 0;
-	options->opponentChromosomeIndexToUse = -1;
-	for(int i = 0; i < NCRITERIA; i++){
-		options->fitness[i] = -1000.0;
-	}
+
+//	options->chromosome = "";
+//	options->opponentChromosomeCount = 0;
+//	options->opponentChromosomeIndexToUse = -1;
+//	for(int i = 0; i < NCRITERIA; i++){
+//		options->fitness[i] = -1000.0;
+//	}
 
 	// numUnits side A 	// A are "friendlies", Side RED
 	// numUnits side B 	// B are "Enemies", Side BLUE
@@ -75,6 +80,10 @@ void setOptions(Options *options){
 		ifs >> options->enableGfx;
 		ifs >> options->startFriendPos;;
 	}
+	else {
+		std::cout << "Could not find Input file: " << options->inputFile <<  " -  Terminate " << std::endl;
+		exit(-1);
+	}
 
 	ifs.close();
 	std::cout << "Input file: " << options->inputFile <<  " Output file: " << options->outputFile << std::endl;
@@ -90,23 +99,25 @@ Options* makeOptions(int argc, char*argv[]){
 	return options;
 }
 void writeFitness(Options *options){
-	//std::cout << "Writing fitnesses" << std::endl;
+	std::cout << "Finished. Writing fitnesses:" << std::endl;
 	std::ofstream ofs;
 	ofs.open(options->outputFile.c_str(), std::ofstream::out | std::ofstream::trunc);
 	if(ofs.is_open()){
 		for(int i = 0; i < NCRITERIA; i++){
 			ofs << options->fitness[i] << " ";
+			std::cout << options->fitness[i] << " ";
 		}
 		ofs << std::endl;
 	}
 
+	std::cout << std::endl;
 	ofs.close();//close it anyway
 	return;
 }
 
 int main(int argc, char *argv[]){
 
-	double fitness;
+	//double fitness;
 
 	//srandom(time(NULL));
 	srandom(199);
@@ -135,6 +146,7 @@ int main(int argc, char *argv[]){
 	delete options;
 	delete engine;
 
+	std::cout << "Done successfully." << std::endl;
 	return 0;
 }
 
